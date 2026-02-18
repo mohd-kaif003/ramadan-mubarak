@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramadan Mubarak | Royal Edition</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --gold: #FFD700;
+            --royal-green: #002b1a;
+            --soft-gold: #f9e27d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            background: radial-gradient(circle at center, #003d22 0%, #001a0f 100%);
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            perspective: 1000px;
+        }
+
+        /* --- STARRY NIGHT BACKGROUND --- */
+        #canvas-stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        /* --- HANGING LANTERNS (PREMIUM) --- */
+        .lantern-container {
+            position: absolute;
+            top: -20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        .lantern {
+            width: 40px;
+            height: 60px;
+            background: var(--gold);
+            border-radius: 5px;
+            position: relative;
+            animation: swing 4s infinite ease-in-out;
+            transform-origin: top center;
+            box-shadow: 0 0 20px var(--gold);
+        }
+
+        .lantern::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            width: 2px;
+            height: 40px;
+            background: var(--gold);
+        }
+
+        @keyframes swing {
+
+            0%,
+            100% {
+                transform: rotate(-8deg);
+            }
+
+            50% {
+                transform: rotate(8deg);
+            }
+        }
+
+        /* --- MAIN PREMIUM CARD --- */
+        .wish-card {
+            position: relative;
+            z-index: 10;
+            width: 90%;
+            max-width: 460px;
+            padding: 50px 30px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 40px;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(255, 215, 0, 0.1);
+        }
+
+        .from-text {
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            color: var(--soft-gold);
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .user-name {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.8rem;
+            color: var(--gold);
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .main-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2.2rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .quote-box {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            border-left: 3px solid var(--gold);
+        }
+
+        .quote {
+            font-size: 0.95rem;
+            font-style: italic;
+            color: #ddd;
+            line-height: 1.6;
+        }
+
+        /* --- INTERACTIVE FORM --- */
+        .action-area {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 20px;
+            border-radius: 25px;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 215, 0, 0.4);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            text-align: center;
+            font-size: 1rem;
+            outline: none;
+            margin-bottom: 15px;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            border-radius: 50px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.4s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .btn-gold {
+            background: linear-gradient(45deg, #d4af37, #f9e27d, #d4af37);
+            color: #1a1a1a;
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-whatsapp {
+            background: #25d366;
+            color: white;
+            margin-top: 15px;
+            display: none;
+        }
+
+        /* --- BIG MOON EFFECT --- */
+        .big-moon {
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 250px;
+            height: 250px;
+            background: rgba(255, 215, 0, 0.05);
+            filter: blur(80px);
+            border-radius: 50%;
+            z-index: 1;
+        }
+    </style>
+</head>
+
+<body onclick="playMusic()">
+
+    <div id="canvas-stars"></div>
+    <div class="big-moon"></div>
+
+    <div class="lantern-container">
+        <div class="lantern" style="animation-delay: 0.2s;"></div>
+        <div class="lantern" style="animation-delay: 0.8s; left: 10%;"></div>
+        <div class="lantern" style="animation-delay: 0.5s; right: 10%;"></div>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-17.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="wish-card">
+        <p class="from-text">Sending You Love From</p>
+        <span id="userName" class="user-name">Your Friend</span>
+
+        <h1 class="main-title">Ramadan <br> <span style="font-size: 1.5rem;">Mubarak 2026</span></h1>
+
+        <div class="quote-box">
+            <p id="quoteDisplay" class="quote">"May the holy month of Ramadan bring you closer to Allah and fill your
+                life with joy."</p>
+        </div>
+
+        <div class="action-area">
+            <div id="inputGroup">
+                <input type="text" id="nameField" placeholder="Enter Your Full Name">
+                <button class="btn btn-gold" onclick="createWish()">Create My Royal Wish</button>
+            </div>
+
+            <a href="#" id="shareLink" class="btn btn-whatsapp">
+                <i class="fab fa-whatsapp"></i> Share On WhatsApp
+            </a>
+        </div>
+
+        <p style="margin-top: 25px; font-size: 0.7rem; opacity: 0.4; letter-spacing: 1px;">PREMIUM EXPERIENCE BY
+            YOURCODER.IN</p>
+    </div>
+
+    <script>
+        // 1. Quotes Collection
+        const quotes = [
+            "May Allah's divine blessings protect and guide you this Ramadan.",
+            "Wishing you a month filled with peace, harmony, and joy.",
+            "May your fasts be easy and your prayers be answered.",
+            "May the crescent moon brighten your path toward enlightenment.",
+            "Wishing you 30 days of healing, prayers, and blessings."
+        ];
+
+        // 2. Initialize
+        window.onload = () => {
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            document.getElementById('quoteDisplay').innerText = `"${randomQuote}"`;
+
+            // URL Name Logic
+            const urlParams = new URLSearchParams(window.location.search);
+            const sender = urlParams.get('n');
+            if (sender) {
+                document.getElementById('userName').innerText = decodeURIComponent(sender);
+            }
+
+            // Create Stars Background
+            const starsContainer = document.getElementById('canvas-stars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.style.position = 'absolute';
+                star.style.width = Math.random() * 3 + 'px';
+                star.style.height = star.style.width;
+                star.style.background = 'white';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.opacity = Math.random();
+                star.style.borderRadius = '50%';
+                star.style.boxShadow = '0 0 5px white';
+                starsContainer.appendChild(star);
+            }
+        };
+
+        // 3. Audio Logic
+        function playMusic() {
+            document.getElementById('bgMusic').play().catch(() => { });
+        }
+
+        // 4. Create Wish Logic
+        function createWish() {
+            const name = document.getElementById('nameField').value;
+            if (!name) {
+                alert("Bhai, apna naam to likho!");
+                return;
+            }
+
+            // UI Update
+            document.getElementById('userName').innerText = name;
+            document.getElementById('inputGroup').style.display = "none";
+            const shareBtn = document.getElementById('shareLink');
+            shareBtn.style.display = "flex";
+
+            // Share Link Generation
+            const baseUrl = window.location.href.split('?')[0];
+            const finalLink = `${baseUrl}?n=${encodeURIComponent(name)}`;
+            const message = `🌙 *Ramadan Mubarak 2026* 🌙\n\n*${name}* ne aapke liye ek *Royal Wishing* bheji hai. Niche link par click karke dekhein:\n\n👉 ${finalLink}`;
+
+            shareBtn.href = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
+            playMusic();
+        }
+    </script>
+</body>
+
+</html>
